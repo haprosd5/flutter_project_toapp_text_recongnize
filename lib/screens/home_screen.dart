@@ -32,29 +32,38 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          children: <Widget>[
-            Text(
-              'TODO ',
-              style: GoogleFonts.saira(
-                fontSize: 24,
-                color: kTextPrimaryMainColor,
-                fontWeight: FontWeight.bold,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(40.0),
+        child: AppBar(
+          title: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              Text(
+                'TODO ',
+                style: GoogleFonts.saira(
+                  fontSize: SizeConfig.blockSizeVertical * 3,
+                  color: kTextPrimaryMainColor,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            Text(
-              'NOTE',
-              style: GoogleFonts.saira(
-                  fontSize: 24,
-                  color: kAccendMainColor,
-                  fontWeight: FontWeight.bold),
-            ),
+              Text(
+                'NOTE',
+                style: GoogleFonts.saira(
+                    fontSize: SizeConfig.blockSizeVertical * 3,
+                    color: kAccendMainColor,
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(
+                  Icons.notifications,
+                  size: SizeConfig.blockSizeVertical * 3,
+                ),
+                onPressed: null)
           ],
         ),
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.notifications), onPressed: null)
-        ],
       ),
       body: Container(
         child: SingleChildScrollView(
@@ -64,73 +73,86 @@ class _HomeScreenState extends State<HomeScreen> {
                 startingDayOfWeek: StartingDayOfWeek.monday,
                 calendarController: calendarController,
                 calendarStyle: CalendarStyle(
-                    weekdayStyle: TextStyle(
-                        color: kTextPrimaryMainColor,
-                        fontWeight: FontWeight.bold),
-                    selectedColor: kAccendMainColor,
-                    todayColor: kTextPrimarySubColor),
+                  selectedStyle: TextStyle(
+                    fontSize: SizeConfig.blockSizeVertical * 2,
+                    color: kPrimaryMainColor,
+                  ),
+                  outsideStyle: TextStyle(
+                    fontSize: SizeConfig.blockSizeVertical * 2,
+                  ),
+                  weekendStyle: TextStyle(
+                    fontSize: SizeConfig.blockSizeVertical * 2,
+                    color: Colors.red,
+                  ),
+                  weekdayStyle: TextStyle(
+                    color: kTextPrimaryMainColor,
+                    fontSize: SizeConfig.blockSizeVertical * 2,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  selectedColor: kAccendMainColor,
+                  todayColor: kTextPrimarySubColor,
+                ),
                 daysOfWeekStyle: DaysOfWeekStyle(
                   weekdayStyle: TextStyle(
                       color: Color(0xff30384c),
                       fontWeight: FontWeight.bold,
-                      fontSize: 16),
+                      fontSize: SizeConfig.blockSizeVertical * 2),
                   weekendStyle: TextStyle(
                       color: Color(0xff30384c),
                       fontWeight: FontWeight.bold,
-                      fontSize: 16),
+                      fontSize: SizeConfig.blockSizeVertical * 2),
                 ),
                 headerStyle: HeaderStyle(
                   formatButtonVisible: false,
                   titleTextStyle: TextStyle(
                     color: Color(0xff30384c),
-                    fontSize: 20,
+                    fontSize: SizeConfig.blockSizeVertical * 2.5,
                     fontWeight: FontWeight.bold,
                   ),
                   leftChevronIcon: Icon(
                     Icons.chevron_left,
+                    size: SizeConfig.blockSizeVertical * 3,
                     color: Color(0xff30384c),
                   ),
                   rightChevronIcon: Icon(
                     Icons.chevron_right,
+                    size: SizeConfig.blockSizeVertical * 3,
                     color: Color(0xff30384c),
                   ),
                 ),
                 locale: 'en_US',
               ),
               SizedBox(
-                height: SizeConfig.blockSizeVertical * 2.0,
+                height: SizeConfig.blockSizeVertical * 1.5,
               ),
               Divider(),
               Container(
-                  width: SizeConfig.screenWidth,
-                  //height: SizeConfig.screenHeight,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'List Todo',
-                          style: GoogleFonts.saira(
-                              fontSize: 22,
-                              color: kTextPrimaryMainColor,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        // hien thi phan todo
-                        Container(
-                          child: ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) {
-                              return buildTodo(
-                                  context, 'Todo one', 'Des todo one');
-                            },
-                            itemCount: 10,
-                          ),
-                        )
-                      ],
-                    ),
-                  )),
+                width: SizeConfig.screenWidth,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'List Todo',
+                        style: GoogleFonts.saira(
+                            fontSize: SizeConfig.blockSizeVertical * 3,
+                            color: kTextPrimarySubColor,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      // hien thi phan todo
+                      ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return buildTodo(context, 'Todo one', 'Des todo one');
+                        },
+                        itemCount: 10,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -146,6 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: null,
           child: Icon(
             Icons.mic_off,
+            size: SizeConfig.blockSizeVertical * 2.5,
             color: kPrimaryMainColor,
           ), // ! false ? Icons.mic :
         ),
@@ -155,54 +178,63 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Container buildTodo(BuildContext context, String title, String description) {
     return Container(
-      //color: Colors.red,
       margin: EdgeInsets.only(
-          top: SizeConfig.blockSizeHorizontal * 1.5,
-          bottom: SizeConfig.blockSizeHorizontal * 1.5),
-      child: Row(
-        children: <Widget>[
-          Icon(
-            Icons.check_circle,
-            color: kAccendMainColor,
-            size: SizeConfig.blockSizeVertical * 3,
-          ),
-          SizedBox(
-            width: SizeConfig.screenWidth * 0.03,
-          ),
-          Container(
-            width: SizeConfig.screenWidth * 0.8,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          top: SizeConfig.blockSizeHorizontal * 1.5, bottom: SizeConfig.blockSizeHorizontal * 1.5),
+      child: Container(
+        child: Row(
+          children: <Widget>[
+            Flexible(
+              flex: 1,
+              child: Icon(
+                Icons.check_circle,
+                color: kAccendMainColor,
+                size: SizeConfig.blockSizeVertical * 3,
+              ),
+            ),
+            SizedBox(
+              width: SizeConfig.screenWidth * 0.03,
+            ),
+            Flexible(
+              flex: 10,
+              child: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(title,
-                        style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical * 2.5,
-                            fontWeight: FontWeight.bold,
-                            color: kTextPrimaryMainColor)),
-                    Text('today',
-                        style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical * 1.5,
-                            fontStyle: FontStyle.italic,
-                            color: kTextPrimarySubColor)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          title,
+                          style: TextStyle(
+                              fontSize: SizeConfig.blockSizeVertical * 2.5,
+                              fontWeight: FontWeight.bold,
+                              color: kTextPrimaryMainColor),
+                        ),
+                        Text(
+                          'today',
+                          style: TextStyle(
+                              fontSize: SizeConfig.blockSizeVertical * 1.5,
+                              fontStyle: FontStyle.italic,
+                              color: kTextPrimarySubColor),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: SizeConfig.blockSizeVertical * 1,
+                    ),
+                    Text(
+                      description,
+                      style: TextStyle(
+                          fontSize: SizeConfig.blockSizeVertical * 2,
+                          color: kTextSecondaryMainColor,
+                          fontWeight: FontWeight.normal),
+                    ),
                   ],
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  description,
-                  style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical * 2,
-                      color: kTextSecondaryMainColor,
-                      fontWeight: FontWeight.normal),
-                ),
-              ],
-            ),
-          )
-        ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
