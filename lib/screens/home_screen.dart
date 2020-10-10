@@ -2,6 +2,7 @@ import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projecttodoapp/components/item_todo.dart';
 import 'package:projecttodoapp/helper/constants.dart';
 import 'package:projecttodoapp/helper/size_config.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -128,6 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Divider(),
               Container(
                 width: SizeConfig.screenWidth,
+                margin: EdgeInsets.only(bottom: SizeConfig.blockSizeVertical * 3.0),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Column(
@@ -145,7 +147,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
-                          return buildTodo(context, 'Todo one', 'Des todo one');
+                          return ItemTodoList(
+                            title: 'Todo $index',
+                            description: 'Description $index',
+                            icon: (index % 2 == 0)
+                                ? Icons.access_alarms
+                                : Icons.check_circle,
+                            status: (index % 2 == 0) ? true : false,
+                            time: '20/3/2020',
+                          );
                         },
                         itemCount: 10,
                       ),
@@ -171,69 +181,6 @@ class _HomeScreenState extends State<HomeScreen> {
             size: SizeConfig.blockSizeVertical * 2.5,
             color: kPrimaryMainColor,
           ), // ! false ? Icons.mic :
-        ),
-      ),
-    );
-  }
-
-  Container buildTodo(BuildContext context, String title, String description) {
-    return Container(
-      margin: EdgeInsets.only(
-          top: SizeConfig.blockSizeHorizontal * 1.5, bottom: SizeConfig.blockSizeHorizontal * 1.5),
-      child: Container(
-        child: Row(
-          children: <Widget>[
-            Flexible(
-              flex: 1,
-              child: Icon(
-                Icons.check_circle,
-                color: kAccendMainColor,
-                size: SizeConfig.blockSizeVertical * 3,
-              ),
-            ),
-            SizedBox(
-              width: SizeConfig.screenWidth * 0.03,
-            ),
-            Flexible(
-              flex: 10,
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          title,
-                          style: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical * 2.5,
-                              fontWeight: FontWeight.bold,
-                              color: kTextPrimaryMainColor),
-                        ),
-                        Text(
-                          'today',
-                          style: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical * 1.5,
-                              fontStyle: FontStyle.italic,
-                              color: kTextPrimarySubColor),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: SizeConfig.blockSizeVertical * 1,
-                    ),
-                    Text(
-                      description,
-                      style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical * 2,
-                          color: kTextSecondaryMainColor,
-                          fontWeight: FontWeight.normal),
-                    ),
-                  ],
-                ),
-              ),
-            )
-          ],
         ),
       ),
     );
