@@ -34,10 +34,23 @@ dependencies:
   table_calendar: ^2.2.3
   #avart
   avatar_glow: ^1.2.0
+  # tao cau truc cho bloc
+  flutter_bloc: ^6.0.6
+  equatable: ^1.2.5
+  # sqlite
+  moor_flutter: ^3.1.0
+  #date_time_picker
+  day_night_time_picker: ^0.3.0+2
+  #speed to text
+  speech_to_text: ^2.7.0
+  #fomart datetime
+  intl: ^0.16.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  moor_generator: ^3.3.1
+  build_runner:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -49,7 +62,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
+  assets:
+    - assets/images/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

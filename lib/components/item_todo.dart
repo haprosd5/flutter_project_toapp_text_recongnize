@@ -45,30 +45,21 @@ class ItemTodoList extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          title,
-                          style: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical * 2.5,
-                              fontWeight: FontWeight.bold,
-                              color: kTextPrimaryMainColor),
-                        ),
-                        Text(
-                          time,
-                          style: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical * 1.5,
-                              fontStyle: FontStyle.italic,
-                              color: kTextPrimarySubColor),
-                        ),
-                      ],
+                    Text(
+                      title,
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: SizeConfig.blockSizeVertical * 2.5,
+                          fontWeight: FontWeight.bold,
+                          color: kTextPrimaryMainColor),
                     ),
+
                     SizedBox(
                       height: SizeConfig.blockSizeVertical * 1,
                     ),
                     Text(
-                      description,
+                      time,
                       style: TextStyle(
                           fontSize: SizeConfig.blockSizeVertical * 2,
                           color: kTextSecondaryMainColor,
