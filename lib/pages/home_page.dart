@@ -1,9 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projecttodoapp/components/item_arrange.dart';
 import 'package:projecttodoapp/components/item_todo.dart';
 import 'package:projecttodoapp/helper/constants.dart';
 import 'package:projecttodoapp/helper/size_config.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,20 +12,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  CalendarController calendarController;
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    calendarController = CalendarController();
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    calendarController.dispose();
   }
 
   @override
@@ -34,58 +31,86 @@ class _HomePageState extends State<HomePage> {
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            TableCalendar(
-              startingDayOfWeek: StartingDayOfWeek.monday,
-              calendarController: calendarController,
-              calendarStyle: CalendarStyle(
-                selectedStyle: TextStyle(
-                  fontSize: SizeConfig.blockSizeVertical * 2,
-                  color: kPrimaryMainColor,
-                ),
-                outsideStyle: TextStyle(
-                  fontSize: SizeConfig.blockSizeVertical * 2,
-                ),
-                weekendStyle: TextStyle(
-                  fontSize: SizeConfig.blockSizeVertical * 2,
-                  color: Colors.red,
-                ),
-                weekdayStyle: TextStyle(
-                  color: kTextPrimaryMainColor,
-                  fontSize: SizeConfig.blockSizeVertical * 2,
-                  fontWeight: FontWeight.bold,
-                ),
-                selectedColor: kAccendMainColor,
-                todayColor: kTextPrimarySubColor,
+            Container(
+              margin: EdgeInsets.all(16),
+              padding: EdgeInsets.all(16),
+              width: SizeConfig.screenWidth,
+              height: SizeConfig.blockSizeVertical * 25,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomCenter,
+                    stops: [0.7, 0.6],
+                    colors: [kAccendMainColor, Colors.cyan],
+                  ),
+                  /*boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 5,
+                      blurRadius: 6,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],*/
+                  borderRadius: BorderRadius.all(Radius.circular(5))),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'HELLO MR,HA !!',
+                    style: GoogleFonts.saira(
+                      fontSize: SizeConfig.blockSizeVertical * 3,
+                      color: kPrimaryMainColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    "Let's start a new day arrange your work ",
+                    style: GoogleFonts.saira(
+                      fontSize: SizeConfig.blockSizeVertical * 2,
+                      color: kPrimaryMainColor,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                  SizedBox(
+                    height: SizeConfig.blockSizeVertical * 1.5,
+                  ),
+                  Text(
+                    'Work report',
+                    style: GoogleFonts.saira(
+                      fontSize: SizeConfig.blockSizeVertical * 3,
+                      color: kPrimaryMainColor,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      ItemArrange(
+                        arrowColor: Colors.green[900],
+                        iconArrange: Icons.arrow_upward,
+                        textState: 'Success: ',
+                        textColor: Colors.green[900],
+                        numArrange: '12',
+                      ),
+                      ItemArrange(
+                        arrowColor: Colors.green[900],
+                        iconArrange: Icons.arrow_downward,
+                        textState: 'Watting: ',
+                        textColor: Colors.yellowAccent,
+                        numArrange: '10',
+                      ),
+                      ItemArrange(
+                        arrowColor: Colors.green[900],
+                        iconArrange: Icons.arrow_downward,
+                        textState: 'Delay: ',
+                        textColor: Colors.redAccent,
+                        numArrange: '5',
+                      )
+                    ],
+                  )
+                ],
               ),
-              daysOfWeekStyle: DaysOfWeekStyle(
-                weekdayStyle: TextStyle(
-                    color: Color(0xff30384c),
-                    fontWeight: FontWeight.bold,
-                    fontSize: SizeConfig.blockSizeVertical * 2),
-                weekendStyle: TextStyle(
-                    color: Color(0xff30384c),
-                    fontWeight: FontWeight.bold,
-                    fontSize: SizeConfig.blockSizeVertical * 2),
-              ),
-              headerStyle: HeaderStyle(
-                formatButtonVisible: false,
-                titleTextStyle: TextStyle(
-                  color: Color(0xff30384c),
-                  fontSize: SizeConfig.blockSizeVertical * 2.5,
-                  fontWeight: FontWeight.bold,
-                ),
-                leftChevronIcon: Icon(
-                  Icons.chevron_left,
-                  size: SizeConfig.blockSizeVertical * 3,
-                  color: Color(0xff30384c),
-                ),
-                rightChevronIcon: Icon(
-                  Icons.chevron_right,
-                  size: SizeConfig.blockSizeVertical * 3,
-                  color: Color(0xff30384c),
-                ),
-              ),
-              locale: 'en_US',
             ),
             SizedBox(
               height: SizeConfig.blockSizeVertical * 1.5,
@@ -108,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                           fontWeight: FontWeight.bold),
                     ),
                     /**
-                     * ! hien thi phan cua #todo list */
+                               * ! hien thi phan cua #todo list */
                     ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,

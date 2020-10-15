@@ -5,7 +5,7 @@ import 'package:projecttodoapp/components/float_button.dart';
 import 'package:projecttodoapp/components/title_app.dart';
 import 'package:projecttodoapp/helper/size_config.dart';
 import 'package:projecttodoapp/pages/home_page.dart';
-import 'package:table_calendar/table_calendar.dart';
+
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -13,20 +13,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  CalendarController calendarController;
+
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    calendarController = CalendarController();
+
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    calendarController.dispose();
+
   }
 
   @override
