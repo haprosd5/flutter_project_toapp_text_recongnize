@@ -11,13 +11,10 @@ class TodoAddEvent extends TodoEvent {
 }
 
 class TodoEditEvent extends TodoEvent {
-  final Todo todo;
-
-  TodoEditEvent({this.todo});
 
   @override
   // TODO: implement props
-  List<Object> get props => [todo];
+  List<Object> get props => [];
 }
 
 class TodoDeleteEvent extends TodoEvent {

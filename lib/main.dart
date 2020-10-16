@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:projecttodoapp/helper/constants.dart';
 
+import 'codes/dbs/database.dart';
 import 'screens/home_screen.dart';
 
-void main() {
-  runApp(MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(
+    MyApp(
+      db: await $FloorAppDatabase.databaseBuilder('app_database.db').build(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+  const MyApp({Key key, this.db}) : super(key: key);
+  final AppDatabase db;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,10 +33,8 @@ class MyApp extends StatelessWidget {
           actionsIconTheme: IconThemeData(color: kTextPrimarySubColor),
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
-
       ),
       debugShowCheckedModeBanner: false,
-
       home: HomeScreen(),
     );
   }

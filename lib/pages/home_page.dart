@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                           time: '12:00 AM',
                         );
                       },
-                      itemCount: 10,
+                      itemCount: 1,
                     ),
                   ],
                 ),
