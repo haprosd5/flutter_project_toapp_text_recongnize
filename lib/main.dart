@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projecttodoapp/blocs/todo_bloc/todo_bloc.dart';
+import 'package:projecttodoapp/codes/sevices/todo_service.dart';
 import 'package:projecttodoapp/helper/constants.dart';
 
 import 'codes/dbs/database.dart';
@@ -20,22 +23,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        scaffoldBackgroundColor: kPrimaryMainColor,
-        primaryColor: kPrimaryMainColor,
-        accentColor: kAccendMainColor,
-        appBarTheme: AppBarTheme(
-          elevation: 0,
-          color: Colors.white,
-          brightness: Brightness.light,
-          actionsIconTheme: IconThemeData(color: kTextPrimarySubColor),
-        ),
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
-    );
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => TodoBloc(TodoService(db: this.db))),
+        ],
+        child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            scaffoldBackgroundColor: kPrimaryMainColor,
+            primaryColor: kPrimaryMainColor,
+            accentColor: kAccendMainColor,
+            appBarTheme: AppBarTheme(
+              elevation: 0,
+              color: Colors.white,
+              brightness: Brightness.light,
+              actionsIconTheme: IconThemeData(color: kTextPrimarySubColor),
+            ),
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+          debugShowCheckedModeBanner: false,
+          home: HomeScreen(),
+        ));
   }
 }

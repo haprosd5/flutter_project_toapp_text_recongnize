@@ -1,10 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projecttodoapp/blocs/todo_bloc/todo_bloc.dart';
+import 'package:projecttodoapp/codes/entitys/todo_entity.dart';
 import 'package:projecttodoapp/components/item_arrange.dart';
 import 'package:projecttodoapp/components/item_todo.dart';
 import 'package:projecttodoapp/helper/constants.dart';
 import 'package:projecttodoapp/helper/size_config.dart';
+import 'package:projecttodoapp/pages/initial_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -14,13 +18,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -133,23 +135,21 @@ class _HomePageState extends State<HomePage> {
                           fontWeight: FontWeight.bold),
                     ),
                     /**
-                               * ! hien thi phan cua #todo list */
-                    ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return ItemTodoList(
-                          title: 'Todo $index',
-                          description: 'Description $index',
-                          icon: (index % 2 == 0)
-                              ? Icons.access_alarms
-                              : Icons.check_circle,
-                          status: (index % 2 == 0) ? true : false,
-                          time: '12:00 AM',
-                        );
-                      },
-                      itemCount: 1,
-                    ),
+                               * ? Hiển thị todoList
+                               * ? Load lai du lieu moi khi them #todo item
+                               * */
+                    BlocBuilder<TodoBloc, TodoState>(builder: (context, state) {
+                      if (state is TodoInitial) {
+                        BlocProvider.of<TodoBloc>(context).add(TodoGetEvent());
+                        return InitialPage();
+                      } else if (state is TodoLoading) {
+                        return InitialPage();
+                      } else if (state is TodoLoaded) {
+                        return buildListTodo(context, state.list);
+                      } else {
+                        return InitialPage();
+                      }
+                    }),
                   ],
                 ),
               ),
@@ -157,6 +157,27 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget buildListTodo(
+    BuildContext context,
+    List<TodoEntity> news,
+  ) {
+    return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        print(news[index].title);
+        return ItemTodoList(
+          title: (news[index].title.runtimeType == String) ? news[index].title : 'Title todo do not setting',
+          description: 'Description $index',
+          icon: (index % 2 == 0) ? Icons.access_alarms : Icons.check_circle,
+          status: (index % 2 == 0) ? true : false,
+          time: news[index].status.toString(),
+        );
+      },
+      itemCount: news.length,
     );
   }
 }

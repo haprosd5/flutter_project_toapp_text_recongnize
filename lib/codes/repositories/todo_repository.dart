@@ -11,4 +11,5 @@ abstract class TodoRepositoryDao extends IRepositoryDaoInterface<TodoEntity> {
 
    @Query('SELECT * FROM Todos')
    Future<List<TodoEntity>> getAll();
+
 }

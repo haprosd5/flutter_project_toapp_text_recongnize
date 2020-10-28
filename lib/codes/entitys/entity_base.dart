@@ -12,7 +12,7 @@ class EntityBase {
 
 
 enum Status {
-   complete,
-   wait,
-   delay,
+   complete, // 0
+   wait, //1
+   delay, //-1
 }
