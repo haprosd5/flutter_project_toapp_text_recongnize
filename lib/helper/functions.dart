@@ -11,9 +11,9 @@ import 'custom_picker.dart';
 Future<DateTime> tripEditModalBottomSheet(BuildContext context) async {
   return await DatePicker.showPicker(
     context,
-    showTitleActions: true,
+    //showTitleActions: true,
     theme: DatePickerTheme(
-      containerHeight: 210.0,
+      containerHeight: SizeConfig.blockSizeVertical * 30,
       cancelStyle: GoogleFonts.saira(
         fontWeight: FontWeight.normal,
         color: kTextSecondaryMainColor,
@@ -27,7 +27,6 @@ Future<DateTime> tripEditModalBottomSheet(BuildContext context) async {
     ),
     onConfirm: (time) {
       String formattedDate = DateFormat('HH:mm').format(time);
-      print('confirm $formattedDate');
       return DialogHelper.exit(context, formattedDate);
     },
     pickerModel: CustomPicker(
@@ -36,3 +35,5 @@ Future<DateTime> tripEditModalBottomSheet(BuildContext context) async {
     ),
   );
 }
+
+

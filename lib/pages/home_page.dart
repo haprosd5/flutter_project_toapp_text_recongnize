@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:projecttodoapp/blocs/todo_bloc/todo_bloc.dart';
 import 'package:projecttodoapp/codes/entitys/todo_entity.dart';
 import 'package:projecttodoapp/components/item_arrange.dart';
-import 'package:projecttodoapp/components/item_todo.dart';
+import 'package:projecttodoapp/components/task.dart';
 import 'package:projecttodoapp/helper/constants.dart';
 import 'package:projecttodoapp/helper/size_config.dart';
 import 'package:projecttodoapp/pages/initial_page.dart';
@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
               margin: EdgeInsets.all(16),
               padding: EdgeInsets.all(16),
               width: SizeConfig.screenWidth,
-              height: SizeConfig.blockSizeVertical * 25,
+              height: SizeConfig.blockSizeVertical * 26,
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                     height: SizeConfig.blockSizeVertical * 1.5,
                   ),
                   Text(
-                    'Work report',
+                    'Tasks report',
                     style: GoogleFonts.saira(
                       fontSize: SizeConfig.blockSizeVertical * 3,
                       color: kPrimaryMainColor,
@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                       ItemArrange(
                         arrowColor: Colors.green[900],
                         iconArrange: Icons.arrow_upward,
-                        textState: 'Success: ',
+                        textState: 'Complete: ',
                         textColor: Colors.green[900],
                         numArrange: '12',
                       ),
@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: SizeConfig.blockSizeVertical * 1.5,
             ),
-            Divider(),
+
             Container(
               width: SizeConfig.screenWidth,
               margin:
@@ -119,8 +119,9 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    Divider(),
                     Text(
-                      'List Works',
+                      'List Tasks',
                       style: GoogleFonts.saira(
                           fontSize: SizeConfig.blockSizeVertical * 3,
                           color: kTextPrimarySubColor,
@@ -166,7 +167,7 @@ class _HomePageState extends State<HomePage> {
           description: 'Description $index',
           icon: (index % 2 == 0) ? Icons.access_alarms : Icons.check_circle,
           status: (index % 2 == 0) ? true : false,
-          time: news[index].status.toString(),
+          time: news[index].updateAt,
         );
       },
       itemCount: news.length,

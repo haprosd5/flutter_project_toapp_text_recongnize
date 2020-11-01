@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projecttodoapp/blocs/todo_bloc/todo_bloc.dart';
 import 'package:projecttodoapp/helper/constants.dart';
 import 'package:projecttodoapp/helper/size_config.dart';
 
@@ -10,13 +12,31 @@ class DialogHelper {
 }
 
 class DiaLogAddTodo extends StatefulWidget {
-  DiaLogAddTodo(String timePicker);
+  final String timePicker;
+
+  DiaLogAddTodo(this.timePicker);
 
   @override
-  _DiaLogAddTodoState createState() => _DiaLogAddTodoState();
+  _DiaLogAddTodoState createState() => _DiaLogAddTodoState(this.timePicker);
 }
 
 class _DiaLogAddTodoState extends State<DiaLogAddTodo> {
+  String time;
+  final _controller = TextEditingController();
+
+  _DiaLogAddTodoState(this.time);
+
+  void onValueChange() {
+    setState(() {
+      _controller.text;
+    });
+  }
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(onValueChange);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -38,16 +58,18 @@ class _DiaLogAddTodoState extends State<DiaLogAddTodo> {
                     child: TextField(
                       minLines: 1,
                       maxLines: 5,
+                      maxLength: 200,
                       keyboardType: TextInputType.text,
                       style: GoogleFonts.saira(
                         fontWeight: FontWeight.normal,
                         color: kTextPrimaryMainColor,
                         fontSize: SizeConfig.blockSizeVertical * 2.5,
                       ),
+                      controller: _controller,
                       decoration: new InputDecoration(
                         labelText: 'Please write work content',
-                        counterText: '12/150',
-                        contentPadding: EdgeInsets.only(top: 10, bottom: 10),
+                        counterText: '${200 - _controller.text.length}/200',
+                        contentPadding: EdgeInsets.only(bottom: 10),
                         counterStyle: GoogleFonts.saira(
                           fontWeight: FontWeight.normal,
                           color: kTextPrimarySubColor,
@@ -75,7 +97,9 @@ class _DiaLogAddTodoState extends State<DiaLogAddTodo> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         FlatButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).pop(1);
+                            },
                             color: kPrimaryMainColor,
                             child: Text(
                               'Cancel',
@@ -86,14 +110,18 @@ class _DiaLogAddTodoState extends State<DiaLogAddTodo> {
                               ),
                             )),
                         RaisedButton.icon(
-                            onPressed: () {},
+                            onPressed: () {
+                              _listen(context, time, _controller.text);
+
+                              Navigator.of(context).pop(1);
+                            },
                             icon: Icon(
                               Icons.check_circle,
                               color: kPrimaryMainColor,
                             ),
                             color: kAccendMainColor,
                             label: Text(
-                              'Create Todo',
+                              'Create Task',
                               style: GoogleFonts.saira(
                                 fontWeight: FontWeight.bold,
                                 color: kPrimaryMainColor,
@@ -106,5 +134,14 @@ class _DiaLogAddTodoState extends State<DiaLogAddTodo> {
             )),
       ),
     );
+  }
+
+  /**
+   * ! xứ lý sư kiện thêm task
+   * */
+  void _listen(BuildContext context, String taskTime, String taskName) {
+    // ignore: close_sinks
+    final driver = BlocProvider.of<TodoBloc>(context);
+    driver.add(TodoAddEvent(title: taskName, datetime: taskTime));
   }
 }

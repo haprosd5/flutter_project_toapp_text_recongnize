@@ -13,7 +13,7 @@ class TodoGetEvent extends TodoEvent {
 }
 class TodoAddEvent extends TodoEvent {
   final String title;
-  final DateTime datetime;
+  final String datetime;
   TodoAddEvent({this.title, this.datetime});
   @override
   // TODO: implement props

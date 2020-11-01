@@ -29,7 +29,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
             await _todoService.getLoadAllTodo();
 
        // remove toan bo data bang todo _todoService.removeAllDataTodo(listAllTodo);
-
+        _todoService.removeAllDataTodo(listAllTodo);
         // hien thi list item
         print(listAllTodo);
 
@@ -46,7 +46,6 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
 
         if (check) {
           yield TodoAddSuccess();
-          print('thanh cong');
           final List<TodoEntity> listAllTodo =
               await _todoService.getLoadAllTodo();
           yield TodoLoaded(list: listAllTodo);

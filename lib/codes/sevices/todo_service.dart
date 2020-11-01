@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:projecttodoapp/codes/dbs/database.dart';
 import 'package:projecttodoapp/codes/entitys/todo_entity.dart';
 
@@ -7,8 +8,8 @@ class TodoService {
 
   Future<bool> getAddTodo(String todoName, String time) async {
     if (todoName != '' || todoName != null) {
-      await db.todoRepositoryDao
-          .insertItem(TodoEntity(title: todoName, status: 1, createdAt: time));
+      await db.todoRepositoryDao.insertItem(TodoEntity(
+          title: toBeginningOfSentenceCase(todoName), status: 1, createdAt: time, updateAt: time));
       return true;
     }
     return false;
@@ -25,10 +26,9 @@ class TodoService {
   }
 
   Future<bool> removeAllDataTodo(List<TodoEntity> listTodo) async {
-
     try {
       listTodo.forEach((element) {
-       db.todoRepositoryDao.deleteItem(element);
+        db.todoRepositoryDao.deleteItem(element);
       });
       return true;
     } on Error {
@@ -37,7 +37,7 @@ class TodoService {
     }
   }
 
- /* Future<String> getSpeechToText(stt.SpeechToText _speech) async {
+/* Future<String> getSpeechToText(stt.SpeechToText _speech) async {
     String textToSpeech;
     bool available = await _speech.initialize(
       onStatus: (val) => print('onStatus: $val'),

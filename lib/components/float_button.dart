@@ -35,18 +35,5 @@ class _FloatButtonState extends State<FloatButton> {
     );
   }
 
-  void _listen(BuildContext context, DateTime dateTime) async {
-    String time = dateTime.toString();
-    print(time);
-
-    /*String title = await _speechToText.getSpeechToText(_speech);
-    String time = dateTime.toString();
-    // ignore: close_sinks
-    final driver = BlocProvider.of<TodoBloc>(context);
-    driver.add(TodoAddEvent(title: title, datetime: time));*/
-  }
-
-
-
 
 }

@@ -9,7 +9,7 @@ abstract class TodoRepositoryDao extends IRepositoryDaoInterface<TodoEntity> {
    @Query('SELECT * FROM Todos WHERE id = :id')
    Future<TodoEntity> getById(int id);
 
-   @Query('SELECT * FROM Todos')
+   @Query('SELECT * FROM Todos ORDER BY id DESC')
    Future<List<TodoEntity>> getAll();
 
 }
