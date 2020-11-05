@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
-import 'package:projecttodoapp/blocs/todo_bloc/todo_bloc.dart';
 import 'package:projecttodoapp/helper/constants.dart';
-import 'package:projecttodoapp/helper/custom_picker.dart';
 import 'package:projecttodoapp/helper/functions.dart';
 import 'package:projecttodoapp/helper/size_config.dart';
 
@@ -17,7 +11,6 @@ class FloatButton extends StatefulWidget {
 class _FloatButtonState extends State<FloatButton> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 

@@ -6,7 +6,7 @@ import 'package:projecttodoapp/helper/size_config.dart';
 class ItemDrawer extends StatelessWidget {
   final String name;
   final VoidCallback onPress;
-  IconData icon;
+  final IconData icon;
 
   ItemDrawer({this.name, this.onPress, this.icon});
 

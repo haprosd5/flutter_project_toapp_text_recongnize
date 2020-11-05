@@ -26,8 +26,24 @@ Future<DateTime> tripEditModalBottomSheet(BuildContext context) async {
       ),
     ),
     onConfirm: (time) {
-      String formattedDate = DateFormat('HH:mm').format(time);
-      return DialogHelper.exit(context, formattedDate);
+      if (_checkTimeBeforeAddTask(time)) {
+        String formattedDate = DateFormat('HH:mm').format(time);
+        return DialogHelper.exit(context, formattedDate);
+      } else {
+        Scaffold.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'You select error time of task! Please',
+              style: GoogleFonts.saira(
+                fontWeight: FontWeight.normal,
+                color: kPrimaryMainColor,
+                fontSize: SizeConfig.blockSizeVertical * 2.5,
+              ),
+            ),
+            backgroundColor: Colors.redAccent[200],
+          ),
+        );
+      }
     },
     pickerModel: CustomPicker(
       currentTime: DateTime.now(),
@@ -36,4 +52,7 @@ Future<DateTime> tripEditModalBottomSheet(BuildContext context) async {
   );
 }
 
-
+bool _checkTimeBeforeAddTask(DateTime time) {
+  if (DateTime.now().isAfter(time)) return false;
+  return true;
+}

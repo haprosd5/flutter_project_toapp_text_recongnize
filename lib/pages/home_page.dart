@@ -35,9 +35,9 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             Container(
               margin: EdgeInsets.all(16),
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.all(8),
               width: SizeConfig.screenWidth,
-              height: SizeConfig.blockSizeVertical * 26,
+              height: SizeConfig.blockSizeVertical * 24,
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                       ItemArrange(
                         arrowColor: Colors.green[900],
                         iconArrange: Icons.arrow_upward,
-                        textState: 'Complete: ',
+                        textState: 'Suceess: ',
                         textColor: Colors.green[900],
                         numArrange: '12',
                       ),
@@ -91,14 +91,14 @@ class _HomePageState extends State<HomePage> {
                         arrowColor: Colors.green[900],
                         iconArrange: Icons.arrow_downward,
                         textState: 'Watting: ',
-                        textColor: Colors.yellowAccent,
+                        textColor: Colors.yellow[500],
                         numArrange: '10',
                       ),
                       ItemArrange(
                         arrowColor: Colors.green[900],
                         iconArrange: Icons.arrow_downward,
                         textState: 'Delay: ',
-                        textColor: Colors.redAccent,
+                        textColor: Colors.red,
                         numArrange: '5',
                       )
                     ],
@@ -109,7 +109,6 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: SizeConfig.blockSizeVertical * 1.5,
             ),
-
             Container(
               width: SizeConfig.screenWidth,
               margin:
@@ -119,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Divider(),
+                    Divider(height: 2, color: kTextPrimaryMainColor),
                     Text(
                       'List Tasks',
                       style: GoogleFonts.saira(
@@ -163,7 +162,9 @@ class _HomePageState extends State<HomePage> {
       itemBuilder: (context, index) {
         print(news[index].title);
         return ItemTodoList(
-          title: (news[index].title.runtimeType == String) ? news[index].title : 'Title todo do not setting',
+          title: (news[index].title.runtimeType == String)
+              ? news[index].title
+              : 'Title todo do not setting',
           description: 'Description $index',
           icon: (index % 2 == 0) ? Icons.access_alarms : Icons.check_circle,
           status: (index % 2 == 0) ? true : false,

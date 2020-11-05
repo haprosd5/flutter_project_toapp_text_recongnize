@@ -8,7 +8,7 @@ abstract class TodoEvent extends Equatable {
 class TodoGetEvent extends TodoEvent {
 
   @override
-  // TODO: implement props
+
   List<Object> get props => [];
 }
 class TodoAddEvent extends TodoEvent {
@@ -16,14 +16,14 @@ class TodoAddEvent extends TodoEvent {
   final String datetime;
   TodoAddEvent({this.title, this.datetime});
   @override
-  // TODO: implement props
+  // 
   List<Object> get props => [title, datetime];
 }
 
 class TodoEditEvent extends TodoEvent {
 
   @override
-  // TODO: implement props
+  // 
   List<Object> get props => [];
 }
 
@@ -31,6 +31,6 @@ class TodoDeleteEvent extends TodoEvent {
   final int id;
   TodoDeleteEvent({this.id});
   @override
-  // TODO: implement props
+  // 
   List<Object> get props => [id];
 }

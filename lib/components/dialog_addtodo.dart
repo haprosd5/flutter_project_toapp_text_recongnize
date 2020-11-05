@@ -23,6 +23,7 @@ class DiaLogAddTodo extends StatefulWidget {
 class _DiaLogAddTodoState extends State<DiaLogAddTodo> {
   String time;
   final _controller = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   _DiaLogAddTodoState(this.time);
 
@@ -31,6 +32,7 @@ class _DiaLogAddTodoState extends State<DiaLogAddTodo> {
       _controller.text;
     });
   }
+
   @override
   void initState() {
     super.initState();
@@ -40,6 +42,7 @@ class _DiaLogAddTodoState extends State<DiaLogAddTodo> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+	key: _formKey,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
@@ -56,9 +59,11 @@ class _DiaLogAddTodoState extends State<DiaLogAddTodo> {
                   child: SingleChildScrollView(
                     padding: EdgeInsets.only(top: 2),
                     child: TextField(
+                      /* form nhập dữ liệu cho task*/
                       minLines: 1,
                       maxLines: 5,
                       maxLength: 200,
+                      autofocus: true,
                       keyboardType: TextInputType.text,
                       style: GoogleFonts.saira(
                         fontWeight: FontWeight.normal,
@@ -111,6 +116,7 @@ class _DiaLogAddTodoState extends State<DiaLogAddTodo> {
                             )),
                         RaisedButton.icon(
                             onPressed: () {
+                              _controller.clear();
                               _listen(context, time, _controller.text);
 
                               Navigator.of(context).pop(1);
