@@ -42,7 +42,7 @@ class _DiaLogAddTodoState extends State<DiaLogAddTodo> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-	key: _formKey,
+      key: _formKey,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
@@ -59,7 +59,9 @@ class _DiaLogAddTodoState extends State<DiaLogAddTodo> {
                   child: SingleChildScrollView(
                     padding: EdgeInsets.only(top: 2),
                     child: TextField(
-                      /* form nhập dữ liệu cho task*/
+                      /** 
+                       * ! form nhập dữ liệu cho task
+                       * */
                       minLines: 1,
                       maxLines: 5,
                       maxLength: 200,
@@ -97,45 +99,45 @@ class _DiaLogAddTodoState extends State<DiaLogAddTodo> {
                   height: SizeConfig.blockSizeVertical * 2,
                 ),
                 Flexible(
-                    flex: 1,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        FlatButton(
-                            onPressed: () {
-                              Navigator.of(context).pop(1);
-                            },
-                            color: kPrimaryMainColor,
-                            child: Text(
-                              'Cancel',
-                              style: GoogleFonts.saira(
-                                fontWeight: FontWeight.normal,
-                                color: Colors.red,
-                                fontSize: SizeConfig.blockSizeVertical * 2,
-                              ),
-                            )),
-                        RaisedButton.icon(
-                            onPressed: () {
-                              _controller.clear();
-                              _listen(context, time, _controller.text);
-
-                              Navigator.of(context).pop(1);
-                            },
-                            icon: Icon(
-                              Icons.check_circle,
-                              color: kPrimaryMainColor,
+                  flex: 1,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      FlatButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(1);
+                          },
+                          color: kPrimaryMainColor,
+                          child: Text(
+                            'Cancel',
+                            style: GoogleFonts.saira(
+                              fontWeight: FontWeight.normal,
+                              color: Colors.red,
+                              fontSize: SizeConfig.blockSizeVertical * 2,
                             ),
-                            color: kAccendMainColor,
-                            label: Text(
-                              'Create Task',
-                              style: GoogleFonts.saira(
-                                fontWeight: FontWeight.bold,
-                                color: kPrimaryMainColor,
-                                fontSize: SizeConfig.blockSizeVertical * 2,
-                              ),
-                            )),
-                      ],
-                    ))
+                          )),
+                      RaisedButton.icon(
+                          onPressed: () {
+                            _listen(context, time, _controller.text);
+                            _controller.clear();
+                            Navigator.of(context).pop(1);
+                          },
+                          icon: Icon(
+                            Icons.check_circle,
+                            color: kPrimaryMainColor,
+                          ),
+                          color: kAccendMainColor,
+                          label: Text(
+                            'Create Task',
+                            style: GoogleFonts.saira(
+                              fontWeight: FontWeight.bold,
+                              color: kPrimaryMainColor,
+                              fontSize: SizeConfig.blockSizeVertical * 2,
+                            ),
+                          )),
+                    ],
+                  ),
+                )
               ],
             )),
       ),

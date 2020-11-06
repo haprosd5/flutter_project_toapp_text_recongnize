@@ -118,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Divider(height: 2, color: kTextPrimaryMainColor),
+                    Divider(height: 2),
                     Text(
                       'List Tasks',
                       style: GoogleFonts.saira(

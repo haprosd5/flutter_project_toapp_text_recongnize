@@ -158,7 +158,14 @@ class _$TodoRepositoryDao extends TodoRepositoryDao {
 
   @override
   Future<List<TodoEntity>> getAll() async {
-    return _queryAdapter.queryList('SELECT * FROM Todos', mapper: _todosMapper);
+    return _queryAdapter.queryList('SELECT * FROM Todos ORDER BY id DESC',
+        mapper: _todosMapper);
+  }
+
+  @override
+  Future<List<TodoEntity>> getByText(String temp) async {
+    return _queryAdapter.queryList('SELECT * FROM Todos Where title = ?',
+        arguments: <dynamic>[temp], mapper: _todosMapper);
   }
 
   @override
