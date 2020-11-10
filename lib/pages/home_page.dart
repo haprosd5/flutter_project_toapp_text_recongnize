@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:projecttodoapp/blocs/todo_bloc/todo_bloc.dart';
 import 'package:projecttodoapp/codes/entitys/todo_entity.dart';
 import 'package:projecttodoapp/components/item_arrange.dart';
-import 'package:projecttodoapp/components/task.dart';
+import 'package:projecttodoapp/components/item_todo.dart';
 import 'package:projecttodoapp/helper/constants.dart';
 import 'package:projecttodoapp/helper/size_config.dart';
 import 'package:projecttodoapp/pages/initial_page.dart';
@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
               margin: EdgeInsets.all(16),
               padding: EdgeInsets.all(8),
               width: SizeConfig.screenWidth,
-              height: SizeConfig.blockSizeVertical * 24,
+              height: SizeConfig.blockSizeVertical * 20,
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
@@ -50,6 +50,9 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                  SizedBox(
+                    height: SizeConfig.blockSizeVertical * 2,
+                  ),
                   Text(
                     'HELLO MR,HA !!',
                     style: GoogleFonts.saira(
@@ -59,46 +62,48 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Text(
-                    "Let's start a new day arrange your work ",
+                    "Yesterday's work situation",
                     style: GoogleFonts.saira(
                       fontSize: SizeConfig.blockSizeVertical * 2,
                       color: kPrimaryMainColor,
                       fontWeight: FontWeight.normal,
                     ),
                   ),
-                  SizedBox(
+                 /* SizedBox(
                     height: SizeConfig.blockSizeVertical * 1.5,
                   ),
                   Text(
-                    'Tasks report',
+                    'Report yesterday',
                     style: GoogleFonts.saira(
                       fontSize: SizeConfig.blockSizeVertical * 3,
                       color: kPrimaryMainColor,
                       fontWeight: FontWeight.w500,
                     ),
-                  ),
+                  ),*/
+
                   Row(
+
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       ItemArrange(
-                        arrowColor: Colors.green[900],
+                        arrowColor: kColorGreen,
                         iconArrange: Icons.arrow_upward,
                         textState: 'Suceess: ',
-                        textColor: Colors.green[900],
+                        textColor: kColorGreen,
                         numArrange: '12',
                       ),
                       ItemArrange(
-                        arrowColor: Colors.green[900],
+                        arrowColor: kColorGreen,
                         iconArrange: Icons.arrow_downward,
                         textState: 'Watting: ',
-                        textColor: Colors.yellow[500],
+                        textColor: kColorYellow,
                         numArrange: '10',
                       ),
                       ItemArrange(
-                        arrowColor: Colors.green[900],
+                        arrowColor: kColorGreen,
                         iconArrange: Icons.arrow_downward,
                         textState: 'Delay: ',
-                        textColor: Colors.red,
+                        textColor: kColorRed,
                         numArrange: '5',
                       )
                     ],
@@ -118,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Divider(height: 2),
+                    Divider(height: 1),
                     Text(
                       'List Tasks',
                       style: GoogleFonts.saira(
@@ -126,6 +131,7 @@ class _HomePageState extends State<HomePage> {
                           color: kTextPrimarySubColor,
                           fontWeight: FontWeight.bold),
                     ),
+                    //Divider(height: 1),
                     /**
                                * ? Hiển thị todoList
                                * ? Load lai du lieu moi khi them #todo item
@@ -160,16 +166,7 @@ class _HomePageState extends State<HomePage> {
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        print(news[index].title);
-        return ItemTodoList(
-          title: (news[index].title.runtimeType == String)
-              ? news[index].title
-              : 'Title todo do not setting',
-          description: 'Description $index',
-          icon: (index % 2 == 0) ? Icons.access_alarms : Icons.check_circle,
-          status: (index % 2 == 0) ? true : false,
-          time: news[index].updateAt,
-        );
+        return ItemTodoList(task: news[index]);
       },
       itemCount: news.length,
     );

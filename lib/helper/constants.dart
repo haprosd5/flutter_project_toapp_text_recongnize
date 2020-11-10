@@ -13,6 +13,9 @@ const kTextSecondaryMainColor = Color(0xFF8B8B8B);
 // ! màu chữ của tiêu đề truyện, category, tiêu đề carditem, tieu đề các thành phần trong app, icon khác
 const kTextPrimarySubColor = Color(0xFF3E3E3E);
 
+const kColorGreen = Color(0xFF388E3C);
+const kColorRed = Color(0xFFE64A19);
+const kColorYellow = Color(0xFFFBC02D);
 /**
  * ! tiêu đề truyện SizeConfig.blockSizeVertical * 3
  * ? tiêu đề của phần gợi ý đọc dở SizeConfig.blockSizeVertical * 2.5

@@ -32,15 +32,22 @@ Future<DateTime> tripEditModalBottomSheet(BuildContext context) async {
       } else {
         Scaffold.of(context).showSnackBar(
           SnackBar(
-            content: Text(
-              'You select error time of task! Please',
-              style: GoogleFonts.saira(
-                fontWeight: FontWeight.normal,
-                color: kPrimaryMainColor,
-                fontSize: SizeConfig.blockSizeVertical * 2.5,
+            content: Container(
+              child: Row(
+                children: [
+                  Icon(Icons.error, size: SizeConfig.blockSizeVertical * 3),
+                  Text(
+                    ' You select error time of task! Please',
+                    style: GoogleFonts.saira(
+                      fontWeight: FontWeight.normal,
+                      color: kPrimaryMainColor,
+                      fontSize: SizeConfig.blockSizeVertical * 2,
+                    ),
+                  ),
+                ],
               ),
             ),
-            backgroundColor: Colors.redAccent[200],
+            backgroundColor: kColorRed,
           ),
         );
       }

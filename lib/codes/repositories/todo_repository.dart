@@ -13,4 +13,7 @@ abstract class TodoRepositoryDao extends IRepositoryDaoInterface<TodoEntity> {
 
   @Query('SELECT * FROM Todos Where title = :temp')
   Future<List<TodoEntity>> getByText(String temp);
+
+  @Query('DELETE FROM Todos WHERE id = :id')
+  Future<void> removeById(int id);
 }

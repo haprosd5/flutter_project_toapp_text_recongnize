@@ -20,24 +20,24 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   ) async* {
     /**  ! Xử lý logic của bloc_todo */
     if (event is TodoGetEvent) {
-      /* sự kiện load toàn bộ todo*/
+      /** Su kien load toan bo todo thoi diem ban dau */
       try {
         yield TodoLoading();
 
         final List<TodoEntity> listAllTodo =
             await _todoService.getLoadAllTodo();
 
-       // remove toan bo data bang todo _todoService.removeAllDataTodo(listAllTodo);
-        _todoService.removeAllDataTodo(listAllTodo);
+        // remove toan bo data bang todo _todoService.removeAllDataTodo(listAllTodo);
+        //_todoService.removeAllDataTodo(listAllTodo);
         // hien thi list item
-        print(listAllTodo);
+        //print(listAllTodo);
 
         yield TodoLoaded(list: listAllTodo);
       } on Error {
         yield TodoLoadError('Load toan bo danh sach bi loi');
       }
     } else if (event is TodoAddEvent) {
-      /* sự kiện thêm một todo*/
+      /* sự kiện thêm một todo */
       try {
         yield TodoAdding();
         String time = (event.datetime == null) ? '0:00' : event.datetime;
@@ -52,6 +52,30 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
           yield TodoAddError('Load toan bo danh sach bi loi');
       } on Error {
         yield TodoAddError('Load toan bo danh sach bi loi');
+      }
+    } else if (event is TodoDeleteEvent) {
+      /* su kien xoa mot todo*/
+      try {
+        yield TodoDeleting();
+        await _todoService.removeTodoId(event.id);
+        yield TodoDeleteSuccess();
+        final List<TodoEntity> listAllTodo =
+            await _todoService.getLoadAllTodo();
+        yield TodoLoaded(list: listAllTodo);
+      } on Error {
+        yield TodoDeleteError('Load toan bo danh sach bi loi');
+      }
+    } else if (event is TodoEditEvent) {
+      /* su kien edit todo*/
+      try {
+        yield TodoEditing();
+        await _todoService.editTodo(event.task);
+        yield TodoEditSuccess();
+        final List<TodoEntity> listAllTodo =
+        await _todoService.getLoadAllTodo();
+        yield TodoLoaded(list: listAllTodo);
+      } on Error {
+        yield TodoDeleteError('Load toan bo danh sach bi loi');
       }
     }
   }

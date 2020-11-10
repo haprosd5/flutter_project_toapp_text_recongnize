@@ -1,6 +1,6 @@
 // This is a generated file; do not edit or check into version control.
 FLUTTER_ROOT=C:\flutter
-FLUTTER_APPLICATION_PATH=E:\FLUTTER\flutter_project_toapp_text_recongnize
+FLUTTER_APPLICATION_PATH=D:\FLUTER\flutter_project_toapp_text_recongnize
 FLUTTER_TARGET=lib\main.dart
 FLUTTER_BUILD_DIR=build
 SYMROOT=${SOURCE_ROOT}/../build\ios
